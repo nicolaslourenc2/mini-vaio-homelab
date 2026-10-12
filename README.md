@@ -66,3 +66,92 @@ Remote Device
 |        warden    Kuma |
 |                       |
 +-----------------------+
+```
+Caddy acts as a reverse proxy for services that require HTTPS.  
+Tailscale allows remote access to the server and its services without requiring public port forwarding.  
+
+---
+
+# Docker Structure
+The current environment is organized using Docker Compose.
+
+```text
+docker/
+├── vaultwarden/
+│   ├── docker-compose.yml
+│   └── Caddyfile
+│
+└── uptime-kuma/
+    └── docker-compose.yml
+```
+The directory structure may change as the homelab grows.
+
+---
+
+# Monitoring    
+Uptime Kuma is currently responsible for monitoring service availability.      
+Planned monitoring includes:       
+- Vaultwarden availability
+- HTTPS endpoints
+- TLS certificate validity
+- Docker containers
+- Disk usage
+- RAM usage
+- CPU load
+- HDD SMART health
+- Server temperature
+Lightweight Bash scripts may be used to send system metrics to Uptime Kuma Push Monitors.      
+---
+
+# Backup      
+Backup implementation is currently planned.   
+Possible technologies being evaluated:   
+- Restic
+- Automated backup scripts
+- Scheduled backups using cron
+- Encrypted backups
+- Off-site backup storage
+
+The backup strategy will prioritize low resource usage because the server only has 2 GB of RAM.    
+
+---   
+
+# Security     
+Current security practices include:  
+- UFW as firewall, that only allow port 22 to ssh    
+- Remote access through Tailscale  
+- HTTPS using Caddy
+- No unnecessary public ports exposed
+- Containerized services
+- Encrypted communication
+- Limited hardware attack surface
+Additional hardening will be implemented as the project evolves.
+---
+
+# Goals     
+This homelab is mainly used to develop practical knowledge in:
+- Linux administration
+- Docker
+- Docker Compose
+- Networking
+- Reverse proxies
+- HTTPS / TLS
+- VPN / overlay networks
+- Monitoring
+- Backup strategies
+- Bash scripting
+- Infrastructure troubleshooting
+- DevOps practices
+---
+
+# Why this project?    
+The goal of this project is not to build a large production infrastructure.
+The challenge is actually the opposite:
+How much useful infrastructure can be built using an old laptop with only 2 GB of RAM?
+
+This constraint encourages the use of lightweight tools, resource optimization and a better understanding of how each service consumes system resources.
+The project also serves as a practical portfolio documenting my progress with Linux, infrastructure and DevOps.   
+
+---
+# Status
+Work in progress    
