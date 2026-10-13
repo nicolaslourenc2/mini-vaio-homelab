@@ -1,0 +1,27 @@
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Service persistent data
+**/data/
+**/data/**
+
+# Backups
+backups/
+*.bak
+*.backup
+
+# Logs
+*.log
+logs/
+
+# Certificates / keys
+*.pem
+*.key
+*.crt
+
+# OS / editor files
+.DS_Store
+.vscode/
+.idea/
