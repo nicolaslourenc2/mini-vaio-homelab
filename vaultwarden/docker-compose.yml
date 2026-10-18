@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: always
+    environment:
+      - WEBSOCKET_ENABLED=true # Habilita sincronização instantânea entre dispositivos
+    volumes:
+      - ./data:/data
+
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      # Esta é a linha mágica que permite ao Caddy pedir o certificado SSL ao Tailscale:
+      - /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock
+    depends_on:
+      - vaultwarden
+
+volumes:
+  caddy_data:
+  caddy_config:
